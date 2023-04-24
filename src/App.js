@@ -14,11 +14,9 @@ function App() {
     <div className="App">
       <ErrorBoundary>
         <div>Omkar</div>
-      </ErrorBoundary>
-      <ErrorBoundary>
+
         <div>Gopal</div>
-      </ErrorBoundary>
-      <ErrorBoundary>
+
         <div><Card surname="sai" /></div>
       </ErrorBoundary>
     </div>
