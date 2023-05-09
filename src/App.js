@@ -1,6 +1,8 @@
 
 import './App.css';
 import ErrorBoundary from './components/ErrorBoundary';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 function Card({ surname }) {
   if (surname === "pembarti")
@@ -11,15 +13,17 @@ function Card({ surname }) {
 
 function App() {
   return (
-    <div className="App">
-      <ErrorBoundary>
-        <div>Omkar</div>
+    <Provider store={store}>
+      <div className="App">
+        <ErrorBoundary>
+          <div>Omkar</div>
 
-        <div>Gopal</div>
+          <div>Gopal</div>
 
-        <div><Card surname="sai" /></div>
-      </ErrorBoundary>
-    </div>
+          <div><Card surname="sai" /></div>
+        </ErrorBoundary>
+      </div>
+    </Provider>
   );
 }
 
