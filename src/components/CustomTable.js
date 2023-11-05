@@ -6,13 +6,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Checkbox, Container, FormControl, IconButton, MenuItem, OutlinedInput, Select, Stack } from '@mui/material';
+import { Button, Checkbox, Container, FormControl, IconButton, MenuItem, OutlinedInput, Select, Stack } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 
 
 
-const rows = [1, 2, 3, 4, 5, 6];
 
 // const defaultRecord = {
 //   id: 1,
@@ -41,7 +40,7 @@ const tableCellStyle = {
   "paddingRight": "2px"
 }
 
-export default function CustomTable() {
+export default function CustomTable(props) {
 
   const [records, setRecords] = React.useState(() => [getNewRecord()]);
 
@@ -74,8 +73,32 @@ export default function CustomTable() {
     })
   }
 
+  const onSubmitClick = () => {
+    try {
+      console.log('onSubmitClick');
+      if (records.length === 1) {
+        props.setLogs([]);
+      } else {
+        props.setLogs(records);
+      }
+      //clear the records
+      setRecords([getNewRecord()]);
+    }
+    catch (e) {
+      console.log(e)
+    }
+  }
+
   return (
-    <Container maxWidth="lg" sx={{ padding: "1px" }}>
+    <Container maxWidth="lg" sx={{ padding: "1px", marginTop: '10px' }}>
+      <Button
+        variant="contained"
+        color='success'
+        sx={{ float: 'right' }}
+        onClick={onSubmitClick}
+      >
+        Submit
+      </Button>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} size="small" aria-label="dense simple table">
 

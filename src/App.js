@@ -1,11 +1,14 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 import CustomTable from './components/CustomTable';
+import LogTable from './components/LogTable';
 
 function App() {
+  const [logs, setLogs] = useState([]);
   return (
     <div className="App">
-      <CustomTable></CustomTable>
+      <CustomTable setLogs={setLogs}></CustomTable>
+      <LogTable records={logs}></LogTable>
     </div>
   );
 }
