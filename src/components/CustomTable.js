@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button, Checkbox, Container, FormControl, IconButton, MenuItem, OutlinedInput, Select, Stack } from '@mui/material';
+import { Button, Checkbox, Container, Divider, FormControl, IconButton, MenuItem, OutlinedInput, Select, Stack } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 
@@ -65,8 +65,8 @@ export default function CustomTable(props) {
     setRecords((prevRecords) => [...prevRecords, getNewRecord()]);
   }
   const deleteRecord = (id) => {
-    if (records.length === 1)
-      return;
+    // if (records.length === 1)
+    //   return;
     setRecords((prevRecords) => {
       let newRecords = prevRecords.filter(record => record.id !== id);
       return newRecords;
@@ -76,13 +76,9 @@ export default function CustomTable(props) {
   const onSubmitClick = () => {
     try {
       console.log('onSubmitClick');
-      if (records.length === 1) {
-        props.setLogs([]);
-      } else {
-        props.setLogs(records);
-      }
+      props.setLogs(records);
       //clear the records
-      setRecords([getNewRecord()]);
+      setRecords([]);
     }
     catch (e) {
       console.log(e)
@@ -90,28 +86,29 @@ export default function CustomTable(props) {
   }
 
   return (
-    <Container maxWidth="lg" sx={{ padding: "1px", marginTop: '10px' }}>
+    <Container maxWidth="lg" sx={{ padding: "1px", margin: '10px', display: 'flex', flexDirection: 'column', gap: 1 }}>
       <Button
         variant="contained"
         color='success'
-        sx={{ float: 'right' }}
+        sx={{ marginLeft: "auto" }}
         onClick={onSubmitClick}
       >
         Submit
       </Button>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} size="small" aria-label="dense simple table">
+      <TableContainer component={Paper} sx={{ maxHeight: 300 }}>
+        <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="dense simple table">
 
-          <TableHead>
-            <TableRow>
-              <TableCell align="center" style={tableCellStyle}>And/Or</TableCell>
-              <TableCell align="left" style={tableCellStyle}>Field*</TableCell>
-              <TableCell align="left" style={tableCellStyle}>Operator</TableCell>
-              <TableCell align="left" style={tableCellStyle}>Value</TableCell>
+          <TableHead >
+            <TableRow >
+              <TableCell align="center" style={tableCellStyle} sx={{ backgroundColor: "lightskyblue" }}>And/Or</TableCell>
+              <TableCell align="center" style={tableCellStyle} sx={{ backgroundColor: "lightskyblue" }}>Field*</TableCell>
+              <TableCell align="center" style={tableCellStyle} sx={{ backgroundColor: "lightskyblue" }}>Operator</TableCell>
+              <TableCell align="center" style={tableCellStyle} sx={{ backgroundColor: "lightskyblue" }}>Value</TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
+            {records.length === 0 && <TableCell colSpan={"4"} align="center" >No Records</TableCell>}
             {records.map((row) => (
               <TableRow
                 key={row.id}
@@ -175,8 +172,8 @@ export default function CustomTable(props) {
                       displayEmpty
                       inputProps={{ 'aria-label': 'Without label' }}
                     >
-                      <MenuItem value={10}>=</MenuItem>
-                      <MenuItem value={20}>!=</MenuItem>
+                      <MenuItem value={"Equals"}>=</MenuItem>
+                      <MenuItem value={"Not Equals"}>!=</MenuItem>
                     </Select>
                   </FormControl>
                 </TableCell>
@@ -195,6 +192,15 @@ export default function CustomTable(props) {
           </TableBody>
         </Table>
       </TableContainer>
-    </Container>
+      <Button
+        variant="contained"
+        color='success'
+        sx={{ marginRight: "auto" }}
+        onClick={addRecord}
+      >
+        Add
+      </Button>
+      <Divider variant="fullwidth" color="failure" />
+    </Container >
   );
 }

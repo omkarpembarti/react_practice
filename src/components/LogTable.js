@@ -19,23 +19,29 @@ export default function LogTable(props) {
     const records = props.records;
 
     return (
-        <Container maxWidth="lg" sx={{ padding: "1px", marginTop: '10px' }}>
+        <Container maxWidth="lg" sx={{
+            padding: "1px",
+            margin: '10px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 1
+        }}>
             <Typography component='div' variant='h4' sx={{ textAlign: 'left' }}>LOGS</Typography>
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} sx={{ maxHeight: 200 }}>
                 <Table sx={{ minWidth: 650 }} size="small" aria-label="dense simple table">
 
                     <TableHead>
                         <TableRow>
-                            <TableCell align="center" style={tableCellStyle}>ID</TableCell>
-                            <TableCell align="center" style={tableCellStyle}>And/Or</TableCell>
-                            <TableCell align="center" style={tableCellStyle}>Field*</TableCell>
-                            <TableCell align="center" style={tableCellStyle}>Operator</TableCell>
-                            <TableCell align="center" style={tableCellStyle}>Value</TableCell>
+                            <TableCell align="center" style={tableCellStyle} sx={{ backgroundColor: "lightskyblue" }}>ID</TableCell>
+                            <TableCell align="center" style={tableCellStyle} sx={{ backgroundColor: "lightskyblue" }}>And/Or</TableCell>
+                            <TableCell align="center" style={tableCellStyle} sx={{ backgroundColor: "lightskyblue" }}>Field*</TableCell>
+                            <TableCell align="center" style={tableCellStyle} sx={{ backgroundColor: "lightskyblue" }}>Operator</TableCell>
+                            <TableCell align="center" style={tableCellStyle} sx={{ backgroundColor: "lightskyblue" }}>Value</TableCell>
                         </TableRow>
                     </TableHead>
 
                     <TableBody>
-                        {records.length === 0 && <TableRow>No Logs</TableRow>}
+                        {records.length === 0 && <TableCell colSpan={"5"} align="center" >No Records</TableCell>}
                         {records.map((record) => (
                             <TableRow key={record.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell align="center" style={tableCellStyle}>

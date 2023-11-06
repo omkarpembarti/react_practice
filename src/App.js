@@ -8,6 +8,7 @@ function App() {
   return (
     <div className="App">
       <CustomTable setLogs={setLogs}></CustomTable>
+
       <LogTable records={logs}></LogTable>
     </div>
   );
