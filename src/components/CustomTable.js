@@ -200,7 +200,7 @@ export default function CustomTable(props) {
       >
         Add
       </Button>
-      <Divider variant="fullwidth" color="failure" />
+      <Divider variant="fullwidth" color="black" />
     </Container >
   );
 }
